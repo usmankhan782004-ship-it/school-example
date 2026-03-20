@@ -16,7 +16,7 @@ const features = [
   },
   {
     icon: Trophy,
-    color: "text-[#1a365d]",
+    color: "text-blue-600",
     bg: "bg-blue-50",
     border: "border-blue-200",
     label: "Campus Results",
@@ -26,9 +26,9 @@ const features = [
   },
   {
     icon: ShieldCheck,
-    color: "text-purple-600",
-    bg: "bg-purple-50",
-    border: "border-purple-200",
+    color: "text-red-600",
+    bg: "bg-red-50",
+    border: "border-red-200",
     label: "Digital ID Cards",
     title: "QR-Based Attendance",
     desc: "Every student has a QR Smart Card. Parents can check attendance digitally — no manual registers.",

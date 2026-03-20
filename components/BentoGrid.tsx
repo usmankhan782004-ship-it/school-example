@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Bot, Camera, Stethoscope, BookOpen, Wifi } from "lucide-react";
+import { Bot, Camera, Stethoscope, BookOpen } from "lucide-react";
+import Image from "next/image";
 
 const tiles = [
   {
@@ -11,46 +12,46 @@ const tiles = [
     desc: "Hands-on robotics from Grade 4 — preparing students for tomorrow's careers.",
     icon: Bot,
     span: "sm:col-span-2",
-    bg: "bg-[#1a365d]",
-    iconBg: "bg-white/10",
-    iconColor: "text-white",
-    tagStyle: "bg-emerald-500/20 text-emerald-300",
+    imgUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
+    gradient: "from-blue-600/60 to-blue-900/90",
+    tagStyle: "bg-blue-500/80 text-white backdrop-blur-md",
+    iconColor: "text-blue-300",
   },
   {
     id: "cctv",
-    tag: "🔴 Live",
+    tag: "🔴 Safe",
     title: "CCTV Monitored",
-    desc: "Full HD cameras across all classrooms and corridors. 24/7.",
+    desc: "HD cameras across all classrooms.",
     icon: Camera,
     span: "sm:col-span-1",
-    bg: "bg-slate-800",
-    iconBg: "bg-white/10",
-    iconColor: "text-red-400",
-    tagStyle: "bg-red-500/20 text-red-300",
+    imgUrl: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=600",
+    gradient: "from-red-600/60 to-red-950/90",
+    tagStyle: "bg-red-500/80 text-white backdrop-blur-md",
+    iconColor: "text-red-300",
   },
   {
     id: "staff",
-    tag: "✅ Verified",
-    title: "PMDC Licensed Staff",
-    desc: "Every teacher is government-verified. No unqualified tutors.",
+    tag: "✅ Trusted",
+    title: "PMDC Staff",
+    desc: "Verified, qualified teachers.",
     icon: Stethoscope,
     span: "sm:col-span-1",
-    bg: "bg-emerald-700",
-    iconBg: "bg-white/15",
-    iconColor: "text-white",
-    tagStyle: "bg-white/20 text-white",
+    imgUrl: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=600",
+    gradient: "from-emerald-600/60 to-emerald-950/90",
+    tagStyle: "bg-emerald-500/80 text-white backdrop-blur-md",
+    iconColor: "text-emerald-300",
   },
   {
     id: "library",
     tag: "📚 Digital",
-    title: "Library & E-Resources",
-    desc: "Past papers, e-books, and curated study material — always accessible.",
+    title: "Modern Library",
+    desc: "Curated e-resources and thousands of books.",
     icon: BookOpen,
     span: "sm:col-span-2",
-    bg: "bg-amber-600",
-    iconBg: "bg-white/20",
-    iconColor: "text-white",
-    tagStyle: "bg-white/25 text-white",
+    imgUrl: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=800",
+    gradient: "from-amber-500/50 to-amber-900/90",
+    tagStyle: "bg-amber-500/80 text-white backdrop-blur-md",
+    iconColor: "text-amber-200",
   },
 ];
 
@@ -67,7 +68,7 @@ export default function BentoGrid() {
           transition={{ duration: 0.5 }}
           className="mb-12 text-center"
         >
-          <p className="text-emerald-600 text-sm font-semibold uppercase tracking-widest mb-2">
+          <p className="text-red-500 text-sm font-semibold uppercase tracking-widest mb-2">
             Campus Facilities
           </p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1a365d]">
@@ -84,22 +85,29 @@ export default function BentoGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
-              className={`bento-card ${t.span} ${t.bg} p-6 sm:p-7 flex flex-col gap-4 min-h-[180px]`}
+              className={`bento-card relative ${t.span} p-6 sm:p-7 flex flex-col justify-end gap-3 min-h-[260px] cursor-pointer group`}
             >
-              {/* Tag */}
-              <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${t.tagStyle}`}>
-                {t.tag}
-              </span>
+              <Image 
+                src={t.imgUrl} 
+                alt={t.title} 
+                fill 
+                className="object-cover absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105" 
+              />
+              <div className={`absolute inset-0 z-0 bg-gradient-to-t ${t.gradient}`} />
 
-              {/* Icon + Title */}
-              <div className="flex items-center gap-3">
-                <div className={`w-10 h-10 ${t.iconBg} rounded-xl flex items-center justify-center flex-shrink-0`}>
-                  <t.icon className={`w-5 h-5 ${t.iconColor}`} />
-                </div>
-                <h3 className="text-white font-bold text-base leading-snug">{t.title}</h3>
+              <div className="relative z-20 w-fit">
+                <span className={`text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider ${t.tagStyle}`}>
+                  {t.tag}
+                </span>
               </div>
 
-              <p className="text-white/65 text-sm leading-relaxed">{t.desc}</p>
+              <div className="relative z-20 mt-2">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <t.icon className={`w-5 h-5 ${t.iconColor}`} />
+                  <h3 className="text-white font-bold text-xl leading-snug">{t.title}</h3>
+                </div>
+                <p className="text-white/80 text-sm leading-relaxed max-w-sm">{t.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>
